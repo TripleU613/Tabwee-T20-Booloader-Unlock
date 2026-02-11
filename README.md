@@ -14,9 +14,9 @@ Enable OEM Unlocking:
 
 ---
 
-## How to enter BROM Download Mode
+## BROM Download Mode
 
-Required at each step during the unlock process.
+Required at each step during the unlock.
 
 1. **Power off** the tablet completely
 2. Hold **Volume Down**
@@ -27,11 +27,9 @@ Required at each step during the unlock process.
 
 ## Windows
 
-1. [Download this repo](https://github.com/TripleU613/Tabwee-T20-Booloader-Unlock/archive/refs/heads/main.zip) and extract it
-2. Install the Spreadtrum USB driver (link in [TomKing062's release notes](https://github.com/TomKing062/CVE-2022-38694_unlock_bootloader/releases/tag/1.72)) — or use [Zadig](https://zadig.akeo.ie/) to install WinUSB for the Spreadtrum device
-3. Put tablet in **BROM mode** (see above)
-4. Double-click **`unlock.bat`**
-5. Follow the prompts — you will be asked to reconnect in BROM mode 4 times
+1. Install the Spreadtrum USB driver — or use [Zadig](https://zadig.akeo.ie/) to install WinUSB for the Spreadtrum device
+2. Put tablet in **BROM mode**
+3. Double-click **`unlock.bat`** and follow the prompts
 
 ---
 
@@ -41,38 +39,14 @@ Required at each step during the unlock process.
    ```bash
    sudo apt install wine xxd
    ```
-2. [Download this repo](https://github.com/TripleU613/Tabwee-T20-Booloader-Unlock/archive/refs/heads/main.zip) and extract it
-3. Put tablet in **BROM mode** (see above)
-4. Run:
+2. Put tablet in **BROM mode**
+3. Run:
    ```bash
    chmod +x unlock.sh spd_dump_linux
    ./unlock.sh
    ```
-5. Follow the prompts — you will be asked to reconnect in BROM mode 4 times
 
-The script sets up USB permissions automatically (will ask for sudo password once).
-
----
-
-## After unlock
-
-Reboot to Android. In Developer Options, **OEM Unlocking** will be permanently enabled.
-
-You can now flash a GSI. Recommended for best performance:
-
-| GSI | Notes |
-|---|---|
-| **LineageOS 22.1 arm64-ab** | Lightest, fastest |
-| **Evolution X arm64-ab** | Pixel UI + customisation |
-
-Flash with:
-```bash
-adb reboot bootloader
-fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img
-fastboot flash system <gsi>.img
-fastboot -w
-```
-Then sideload **MindTheGapps Android 15 arm64** from recovery for Google apps.
+The script handles USB permissions automatically (asks for sudo once).
 
 ---
 
